@@ -1,6 +1,7 @@
 // Controllers
-weatherSpa.controller('homeController', ['$scope', 'cityService', function ($scope, cityService) {
+weatherSpa.controller('homeController', ['$scope', '$location', 'cityService', function ($scope, $location, cityService) {
   $scope.cityName = cityService.name;
+  $scope.submit = () => { $location.path("/forecast") }
 
   $scope.$watch('cityName', function () {
     cityService.name = $scope.cityName;
