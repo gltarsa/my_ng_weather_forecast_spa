@@ -1,3 +1,3 @@
 weatherSpa.service('cityService', function () {
-  this.name = 'Boston,MA';
+  this.name = 'Cary, NC';
 });
