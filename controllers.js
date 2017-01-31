@@ -8,16 +8,12 @@ weatherSpa.controller('homeController', ['$scope', '$location', 'cityService', f
   })
 }])
 
-weatherSpa.controller('forecastController', ['$scope','$resource', '$routeParams', 'cityService', function ($scope, $resource, $routeParams, cityService) {
+weatherSpa.controller('forecastController', ['$scope', '$routeParams', 'cityService', 'forecastService', function ($scope, $routeParams, cityService, forecastService) {
   $scope.cityName = cityService.name;
   $scope.days = $routeParams.days || "2"
 
-  var AppId = "82ab2b6f15e451e4cef73f22b514c253";
-  var forecastBase = "http://api.openweathermap.org/data/2.5/forecast"
+  $scope.weatherResult = forecastService.getWeather($scope.cityName, $scope.days)
 
-  $scope.weatherAPI = $resource(`${forecastBase}/daily?APPID=${AppId}`)
-
-  $scope.weatherResult = $scope.weatherAPI.get({ q: $scope.cityName, cnt: $scope.days});
   $scope.kelvinToFahrenheit = (degK) => {
     return Math.round((1.8 * (degK - 273)) + 32)
   }
